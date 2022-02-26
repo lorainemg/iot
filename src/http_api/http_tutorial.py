@@ -63,9 +63,3 @@ def schedule_downlink():
         headers=nheaders
     )
     pprint(response.json())
-
-
-if __name__ == "__main__":
-    put_device_info()
-    # get_event_stream()
-    # schedule_downlink()

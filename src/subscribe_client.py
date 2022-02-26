@@ -3,7 +3,8 @@ import time
 from config import configure_mqtt_client, BROKER_ADDRESS, PORT, APP_ID, PASSWORD
 # import paho.mqtt.subscribe as subscribe
 
-import callbacks
+from mqtt_client import callbacks
+
 
 if __name__ == '__main__':
     client = configure_mqtt_client()

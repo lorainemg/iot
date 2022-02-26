@@ -1,8 +1,10 @@
-import paho.mqtt.client as mqtt
+from mqtt_client.callbacks import on_connect, on_publish, on_subscribe, on_message, on_log
+from mqtt_client.utils import encode, decode, endpoints
+
 from typing import List
-from callbacks import on_connect, on_publish, on_subscribe, on_message, on_log
-from utils import encode, decode, endpoints
 from uuid import uuid1
+
+import paho.mqtt.client as mqtt
 
 class MQTTClient:
     def __init__(self, broker_address: str, port: int, auth_info: dict):

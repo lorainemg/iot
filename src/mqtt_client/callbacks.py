@@ -1,8 +1,7 @@
-import imp
-from paho.mqtt.client import Client
-from utils import encode, decode, endpoints
-from threading import Event
+from mqtt_client.utils import encode, decode, endpoints
 from messages import load_join_response
+
+from threading import Event
 
 connected = Event()
 connected.clear()

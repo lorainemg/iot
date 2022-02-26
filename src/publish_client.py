@@ -1,9 +1,10 @@
 import time
 
 from config import configure_mqtt_client, BROKER_ADDRESS, PORT, APP_ID, PASSWORD, DEVICE_ID
-import callbacks
-import paho.mqtt.publish as publish
+from mqtt_client import callbacks
 from messages import create_downlink_msg
+
+import paho.mqtt.publish as publish
 
 
 if __name__ == '__main__':
@@ -20,7 +21,7 @@ if __name__ == '__main__':
     input()
     # client.publish(f"test/topic", message)
     # time.sleep(20)
-    # client.stop_loop()
+    client.stop_loop()
     # import paho.mqtt.publish as publish
     #
     # publish.single(f"v3/{APP_ID}/devices/{DEVICE_ID}/down/push",

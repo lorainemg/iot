@@ -1,7 +1,25 @@
+from typing import List
+
+from protos.headers_pb2 import Headers
+from protos.device_info_pb2 import SetDeviceInfo, EndDevice, FieldMask
 from protos.downlink_pb2 import Downlinks
 from protos.join_pb2 import JoinResponse
-from google.protobuf.json_format import MessageToJson, Parse
 
+from config import HTTP_API_KEY
+from google.protobuf.json_format import Parse, MessageToJson, MessageToDict
+
+
+def get_headers():
+    header = Headers(Authorization=f"Bearer {HTTP_API_KEY}", Accept="application/json")
+    return MessageToDict(header)
+
+
+def set_device_info(name: str, description: str, paths: List[str]):
+     device_info_data = SetDeviceInfo(end_device=EndDevice(name=name, description=description),
+                                      field_mask=FieldMask(paths=paths))
+     return MessageToJson(device_info_data, preserving_proto_field_name=True)
+ 
+ 
 def create_downlink_msg(f_port: int, frm_payload: str, priority: str) -> str:
     '''
     Helper function to create a downlink message. 
@@ -19,6 +37,7 @@ def create_downlink_msg(f_port: int, frm_payload: str, priority: str) -> str:
     downlinks = Downlinks()
     downlinks.downlink.add(f_port=f_port, frm_payload=frm_payload, priority=priority) 
     return MessageToJson(downlinks)
+
 
 def load_join_response(response: str) -> JoinResponse:
     '''
@@ -50,4 +69,3 @@ def load_join_response(response: str) -> JoinResponse:
     join_response = JoinResponse()
     Parse(response, join_response)
     return join_response
-    
