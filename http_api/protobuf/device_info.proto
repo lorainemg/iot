@@ -1,0 +1,18 @@
+// Message proto to set the device info in the http api server
+syntax = "proto2";
+
+package iot;
+
+message EndDevice {
+    optional string name = 1;
+    optional string description = 2;
+}
+
+message FieldMask {
+    repeated string paths = 1;
+}
+
+message SetDeviceInfo {
+    optional EndDevice end_device = 1;
+    optional FieldMask field_mask = 2;
+}

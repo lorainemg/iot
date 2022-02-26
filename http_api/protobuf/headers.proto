@@ -1,0 +1,11 @@
+// Message proto to get the header info in the http api server
+syntax = "proto2";
+
+package iot;
+
+message Headers {
+  optional string Authorization = 1;
+  optional string Accept = 2;
+  optional string User_Agent = 3;
+  optional string Content_Type = 4;
+}

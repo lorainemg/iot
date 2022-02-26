@@ -1,12 +1,9 @@
 import requests
-from config import HTTP_API_KEY, APP_ID, DEVICE_ID
+from config import APP_ID, DEVICE_ID
 from pprint import pprint
+from messages import get_headers, set_device_info
 
-headers = {
-    "Authorization": f"Bearer {HTTP_API_KEY}",
-    "Accept": "application/json",
-}
-
+headers = get_headers()
 
 def get_device_info():
     response = requests.get(
@@ -18,18 +15,8 @@ def get_device_info():
 
 
 def put_device_info():
-    data = '''{
-   "end_device":{
-      "name":"Test Device",
-      "description":"This is a device to test HTTP api functionality"
-   },
-    "field_mask": {
-      "paths": [
-        "name",
-        "description"
-      ]
-    }
-  }'''
+    data = set_device_info(name="Device to Test", description="This is a device to test HTTP api",
+                           paths=["name", "description"]) 
     response = requests.put(
         f'https://eu1.cloud.thethings.network/api/v3/applications/{APP_ID}/devices/{DEVICE_ID}',
         data,
@@ -79,6 +66,6 @@ def schedule_downlink():
 
 
 if __name__ == "__main__":
-    # put_device_info()
+    put_device_info()
     # get_event_stream()
-    schedule_downlink()
+    # schedule_downlink()
