@@ -9,7 +9,7 @@ DEVICE_ID = "eui-70b3d57ed004cb5f"
 
 
 def configure_mqtt_client():
-    from mqtt_client import MQTTClient
+    from client import MQTTClient
 
     # auth_info = {"api_id": APP_ID, "password": PASSWORD}
     auth_info = {}

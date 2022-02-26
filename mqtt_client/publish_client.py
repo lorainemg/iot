@@ -3,21 +3,19 @@ import time
 from config import configure_mqtt_client, BROKER_ADDRESS, PORT, APP_ID, PASSWORD, DEVICE_ID
 import callbacks
 import paho.mqtt.publish as publish
+from messages import create_downlink_msg
+
 
 if __name__ == '__main__':
     client = configure_mqtt_client()
-    # client.subscribe_to_topic(f"#")
-    message = '''{
-          "downlinks": [{
-            "f_port": 15,
-            "frm_payload": "vu8=",
-            "priority": "NORMAL"
-          }]
-        }'''
+    
     client.start_loop()
+    
     callbacks.connected.wait()
-
-    client.publish("test/up", "on")
+    msg = create_downlink_msg(f_port=15, frm_payload="vu8=", priority="NORMAL")
+    print(msg)
+    
+    client.publish("test/up", msg)
     # client.publish(f"v3/{APP_ID}/devices/{DEVICE_ID}/down/push", message)
     input()
     # client.publish(f"test/topic", message)

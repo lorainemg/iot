@@ -1,0 +1,14 @@
+// Message proto to push downlink traffic in mqtt server
+syntax = "proto2";
+
+package iot;
+
+message Downlink {
+  optional int32 f_port = 1;
+  optional string frm_payload = 2;
+  optional string priority = 3;
+}
+
+message Downlinks {
+  repeated Downlink downlink = 1;
+}
