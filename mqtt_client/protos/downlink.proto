@@ -1,4 +1,4 @@
-// Message proto to push downlink traffic in mqtt server
+// Message proto to push downlink traffic in mqtt server (content of topic v3/app1@tenant1/devices/dev1/down/push)
 syntax = "proto2";
 
 package iot;

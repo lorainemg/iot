@@ -1,6 +1,8 @@
+import imp
 from paho.mqtt.client import Client
 from utils import encode, decode, endpoints
 from threading import Event
+from messages import load_join_response
 
 connected = Event()
 connected.clear()
@@ -8,8 +10,13 @@ connected.clear()
 
 def on_message(client, userdata, msg):
     # decode_message = str(decode(message.payload))
+    decode_message = msg.payload.decode("utf-8")
     print("message topic=", msg.topic)
-    print("message msg=", msg.payload.decode("utf-8"))
+    print("message msg=", decode_message)
+    
+    if msg.topic.endswith("/join"):
+        response = load_join_response(decode_message)
+    
     # print("message retain flag=", message.retain)
     #
     # api_function = endpoints[message.topic]

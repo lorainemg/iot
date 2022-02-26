@@ -1,0 +1,26 @@
+// Message proto of join messages in mqtt server (content of topic v3/app1@tenant1/devices/dev1/join)
+syntax = "proto2";
+
+package iot;
+
+message ApplicationID {
+    optional string application_id = 1;
+}
+
+message EndDeviceID {
+    optional string device_id = 1;
+    optional ApplicationID application_ids = 2;
+    optional string dev_eui = 3;
+    optional string join_eui = 4;
+    optional string dev_addr = 5;
+}
+
+message JoinAccept {
+    optional string session_key_id = 1;
+}
+
+message JoinResponse {
+    optional EndDeviceID end_device_ids = 1;
+    repeated string correlation_ids = 2;
+    optional JoinAccept join_accept = 3;
+}
